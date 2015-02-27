@@ -4,12 +4,12 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+hey, i am a ui/ux developer
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+yes
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[d8nieldonaldson@gmail.com](mailto:d8nieldonaldson@gmail.com)
