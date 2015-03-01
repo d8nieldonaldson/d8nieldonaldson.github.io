@@ -15,6 +15,16 @@ the requirements:
 <p data-height="394" data-theme-id="0" data-slug-hash="raKPYd" data-default-tab="result" data-user="d8nieldonaldson" class='codepen'>See the Pen <a href='http://codepen.io/d8nieldonaldson/pen/raKPYd/'>maintain max # of items in a row// css edition</a> by d8nieldonaldson (<a href='http://codepen.io/d8nieldonaldson'>@d8nieldonaldson</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
+
+the html is a simple unordered list
+
+the interesting part is chaining nth selectors in CSS  
+consider the following:
+
+
+```
+li:nth-child(4n+1):nth-last-child(1)
+```
  
 
 
