@@ -20,7 +20,7 @@ In other words, the requirements are:
 4. Javascript is not an option, must solve this using only CSS!
 
 
-If you don't want to learn about how and why, just check out the codepen below.  
+If you don't want to learn about how and why, just check out the codepen below or [here][css-only-codepen].  
 
 
 
@@ -28,9 +28,9 @@ If you don't want to learn about how and why, just check out the codepen below.
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 
-##how it works##
+##How it works##
 
-the interesting part is chaining nth selectors in CSS  
+The interesting part is chaining nth selectors in CSS  
 	consider the following:
 
 
@@ -41,5 +41,5 @@ li:nth-child(4n+1):nth-last-child(1){ ... }
 
 
 
-[main-codepen]:http://codepen.io/d8nieldonaldson/pen/zxjyRE
+[css-only-codepen]:http://codepen.io/d8nieldonaldson/pen/raKPYd/
 
