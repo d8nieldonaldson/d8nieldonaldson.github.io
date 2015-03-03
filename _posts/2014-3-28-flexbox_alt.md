@@ -24,22 +24,65 @@ If you don't want to learn about how and why, just check out the codepen below o
 
 
 
-<p data-height="394" data-theme-id="0" data-slug-hash="raKPYd" data-default-tab="result" data-user="d8nieldonaldson" class='codepen'>See the Pen <a href='http://codepen.io/d8nieldonaldson/pen/raKPYd/'>maintain max # of items in a row// css edition</a> by d8nieldonaldson (<a href='http://codepen.io/d8nieldonaldson'>@d8nieldonaldson</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<p data-height="350" data-theme-id="0" data-slug-hash="raKPYd" data-default-tab="result" data-user="d8nieldonaldson" class='codepen'>See the Pen <a href='http://codepen.io/d8nieldonaldson/pen/raKPYd/'>maintain max # of items in a row// css edition</a> by d8nieldonaldson (<a href='http://codepen.io/d8nieldonaldson'>@d8nieldonaldson</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 
-##How it works##
+##How It Works##
 
-The interesting part is chaining nth selectors in CSS  
-	consider the following:
+To solve this, I chose a 'nth-child' based approach.  
 
+The nth-child is part of a larger group of CSS [pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) (see also, related: [pseudo-elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) )
+
+If you're not familiar with nth-child selectors in CSS, [read this][nth-child-tricks], you can also play with Lea Verou's [demo](http://lea.verou.me/demos/nth.html).
+
+The pseudo-class syntax is simple, but gives developers a lot of control over the presentation of the elements which it targets, all without the expense of having to clutter up the DOM with new selectors, such as CSS classes.
+
+You probably knew that chaining pseudo-classes is allowed, so you have probably seen and or done something like this:
 
 ```css
-li:nth-child(4n+1):nth-last-child(1){ ... }
+li:first-child:hover{ ... }
 ```
+
+which would allow us to style the hover state of the first list item.  
+
+More importantly, we can extend this pseudo-class chaining to do some fairly sophisticated styling.
+
+## Psuedo-class Chaining Implementation##
+
+For our experiment, we will start with an unordered list of dynamically generated items. We want to have 4 items per row by default. For simplicity, we will use percentages as our measurement unit.
+
+```css
+li{
+	width: 25% /* 4 items max per row or: 1/4 as a percentage */
+}
+```
+
+The above works great, but only if all rows are 4 items. But what if there are a total of 5 items, and not 4 or 8? Let's solve for just this one case right now: a total of 5 elements.
+So, the fifth item can be targeted like this:
+
+```css
+li:nth-child(4n + 1){ ... }
+````
+
+We know that the above selector will actually target the 1st, 5th, 9th et cetera element, which is not exactly what we need. What we want to do is to target the 1st, 5th, and so on _if_ it is also the _last_ 'li' in the 'ul'.  
+
+Considering the ability to chain pseudo-classes, the answer may be apparent: 
+
+```css
+li:nth-child(4n+1):last-child{ width: 100% }
+```
+checkout the codepen below or [here](http://codepen.io/d8nieldonaldson/pen/ZYjpvQ)
+<p data-height="197" data-theme-id="12800" data-slug-hash="ZYjpvQ" data-default-tab="result" data-user="d8nieldonaldson" class='codepen'>See the Pen <a href='http://codepen.io/d8nieldonaldson/pen/ZYjpvQ/'>ZYjpvQ</a> by d8nieldonaldson (<a href='http://codepen.io/d8nieldonaldson'>@d8nieldonaldson</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+
+
 
 
 
 
 [css-only-codepen]:http://codepen.io/d8nieldonaldson/pen/raKPYd/
+
+[nth-child-tricks]:https://css-tricks.com/how-nth-child-works/
 
