@@ -30,7 +30,7 @@ If you don't want to learn about how and why, just check out the codepen below o
 
 ##How It Works##
 
-To solve this, I chose a 'nth-child' based approach.  
+The scope of this post is a 'nth-child' based approach. However, there are other options. We will look at some of these in future, related posts.  
 
 The nth-child is part of a larger group of CSS [pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) (see also, related: [pseudo-elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) )
 
@@ -76,8 +76,14 @@ checkout the codepen below or [here](http://codepen.io/d8nieldonaldson/pen/ZYjpv
 <p data-height="197" data-theme-id="12800" data-slug-hash="ZYjpvQ" data-default-tab="result" data-user="d8nieldonaldson" class='codepen'>See the Pen <a href='http://codepen.io/d8nieldonaldson/pen/ZYjpvQ/'>ZYjpvQ</a> by d8nieldonaldson (<a href='http://codepen.io/d8nieldonaldson'>@d8nieldonaldson</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
+Ok, that was pretty easy, but what about the next case: the list is made up of 6 items. So, we will have one row with 2 items, each taking up 50% of the width.
 
-
+```css
+li:nth-child(4n+1):nth-last-child(2), li:nth-child(4n+2):nth-last-child(1){}
+```
+checkout the codepen below or [here](http://codepen.io/d8nieldonaldson/pen/MYBQvo)
+<p data-height="201" data-theme-id="12800" data-slug-hash="MYBQvo" data-default-tab="result" data-user="d8nieldonaldson" class='codepen'>See the Pen <a href='http://codepen.io/d8nieldonaldson/pen/MYBQvo/'>nth-child elastic rows</a> by d8nieldonaldson (<a href='http://codepen.io/d8nieldonaldson'>@d8nieldonaldson</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 
 
