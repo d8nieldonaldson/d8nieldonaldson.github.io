@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title></title>
+		<description>UI/UX Development</description>
+		<link>/</link>
+		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>nth-child as an alternative to flexbox for elastic rows</title>
+				<description>&lt;p&gt;The goal: A dynamic list of ‘x’ equally sized elements per row. If the last row is &amp;gt; x number of elements, each element should be equal in size and take up the full width of the row.  &lt;/p&gt;
+
+&lt;p&gt;Simple enough, right?  &lt;/p&gt;
+
+&lt;p&gt;However, we have a couple of stipulations:  &lt;/p&gt;
+
+&lt;p&gt;First of all, we cannot use &lt;a href=&quot;http://www.w3.org/TR/css3-flexbox/&quot;&gt;Flexbox&lt;/a&gt;, and second, while a javascript solution would be fairly simple, our layout must be achieved via CSS &lt;em&gt;only&lt;/em&gt;.  &lt;/p&gt;
+
+&lt;p&gt;In other words, the requirements are:    &lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Rows by default must have an explicit number of equally sized items.   &lt;/li&gt;
+  &lt;li&gt;In cases where the last row has fewer items than the desired amount, the items of this row must each take an equal size and fill the entire row.  &lt;/li&gt;
+  &lt;li&gt;We cannot use &lt;a href=&quot;http://www.w3.org/TR/css3-flexbox/&quot;&gt;Flexbox&lt;/a&gt;    &lt;/li&gt;
+  &lt;li&gt;Javascript is not an option, must solve this using only CSS!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you don’t want to learn about how and why, just check out the codepen below or &lt;a href=&quot;http://codepen.io/d8nieldonaldson/pen/raKPYd/&quot;&gt;here&lt;/a&gt;.  &lt;/p&gt;
+
+&lt;p data-height=&quot;350&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;raKPYd&quot; data-default-tab=&quot;result&quot; data-user=&quot;d8nieldonaldson&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/d8nieldonaldson/pen/raKPYd/&quot;&gt;maintain max # of items in a row// css edition&lt;/a&gt; by d8nieldonaldson (&lt;a href=&quot;http://codepen.io/d8nieldonaldson&quot;&gt;@d8nieldonaldson&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;
+&lt;script async=&quot;&quot; src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;how-it-works&quot;&gt;How It Works&lt;/h2&gt;
+
+&lt;p&gt;The scope of this post is a ‘nth-child’ based approach. However, there are other options. We will look at some of these in future, related posts.  &lt;/p&gt;
+
+&lt;p&gt;The nth-child is part of a larger group of CSS &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes&quot;&gt;pseudo-classes&lt;/a&gt; (see also, related: &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements&quot;&gt;pseudo-elements&lt;/a&gt; )&lt;/p&gt;
+
+&lt;p&gt;If you’re not familiar with nth-child selectors in CSS, &lt;a href=&quot;https://css-tricks.com/how-nth-child-works/&quot;&gt;read this&lt;/a&gt;, you can also play with Lea Verou’s &lt;a href=&quot;http://lea.verou.me/demos/nth.html&quot;&gt;demo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The pseudo-class syntax is simple, but gives developers a lot of control over the presentation of the elements which it targets, all without the expense of having to clutter up the DOM with new selectors, such as CSS classes.&lt;/p&gt;
+
+&lt;p&gt;You probably knew that chaining pseudo-classes is allowed, so you have probably seen and or done something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;css
+li:first-child:hover{ ... }
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;which would allow us to style the hover state of the first list item.  &lt;/p&gt;
+
+&lt;p&gt;More importantly, we can extend this pseudo-class chaining to do some fairly sophisticated styling.&lt;/p&gt;
+
+&lt;h2 id=&quot;psuedo-class-chaining-implementation&quot;&gt;Psuedo-class Chaining Implementation&lt;/h2&gt;
+
+&lt;p&gt;For our experiment, we will start with an unordered list of dynamically generated items. We want to have 4 items per row by default. For simplicity, we will use percentages as our measurement unit.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;css
+li{
+	width: 25% /* 4 items max per row or: 1/4 as a percentage */
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The above works great, but only if all rows are 4 items. But what if there are a total of 5 items, and not 4 or 8? Let’s solve for just this one case right now: a total of 5 elements.
+So, the fifth item can be targeted like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;css
+li:nth-child(4n + 1){ ... }
+&lt;/code&gt;`&lt;/p&gt;
+
+&lt;p&gt;We know that the above selector will actually target the 1st, 5th, 9th et cetera element, which is not exactly what we need. What we want to do is to target the 1st, 5th, and so on &lt;em&gt;if&lt;/em&gt; it is also the &lt;em&gt;last&lt;/em&gt; ‘li’ in the ‘ul’.  &lt;/p&gt;
+
+&lt;p&gt;Considering the ability to chain pseudo-classes, the answer may be apparent: &lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;css
+li:nth-child(4n+1):last-child{ width: 100% }
+&lt;/code&gt;
+checkout the codepen below or &lt;a href=&quot;http://codepen.io/d8nieldonaldson/pen/ZYjpvQ&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p data-height=&quot;197&quot; data-theme-id=&quot;12800&quot; data-slug-hash=&quot;ZYjpvQ&quot; data-default-tab=&quot;result&quot; data-user=&quot;d8nieldonaldson&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/d8nieldonaldson/pen/ZYjpvQ/&quot;&gt;ZYjpvQ&lt;/a&gt; by d8nieldonaldson (&lt;a href=&quot;http://codepen.io/d8nieldonaldson&quot;&gt;@d8nieldonaldson&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;
+&lt;script async=&quot;&quot; src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Ok, that was pretty easy, but what about the next case: the list is made up of 6 items. So, we will have one row with 2 items, each taking up 50% of the width.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;css
+li:nth-child(4n+1):nth-last-child(2), li:nth-child(4n+2):nth-last-child(1){}
+&lt;/code&gt;
+checkout the codepen below or &lt;a href=&quot;http://codepen.io/d8nieldonaldson/pen/MYBQvo&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p data-height=&quot;201&quot; data-theme-id=&quot;12800&quot; data-slug-hash=&quot;MYBQvo&quot; data-default-tab=&quot;result&quot; data-user=&quot;d8nieldonaldson&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;http://codepen.io/d8nieldonaldson/pen/MYBQvo/&quot;&gt;nth-child elastic rows&lt;/a&gt; by d8nieldonaldson (&lt;a href=&quot;http://codepen.io/d8nieldonaldson&quot;&gt;@d8nieldonaldson&lt;/a&gt;) on &lt;a href=&quot;http://codepen.io&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;
+&lt;script async=&quot;&quot; src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+</description>
+				<pubDate>Fri, 28 Mar 2014 00:00:00 -0400</pubDate>
+				<link>/css/flexbox/2014/03/28/flexbox_alt.html</link>
+				<guid isPermaLink="true">/css/flexbox/2014/03/28/flexbox_alt.html</guid>
+			</item>
+		
+	</channel>
+</rss>
