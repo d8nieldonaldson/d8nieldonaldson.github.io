@@ -4,21 +4,27 @@
 //
 
 // Colors
-$blue: #4183C4;
+$blue: rgb(0,0,255);
+
+$green: rgb(0,255,0);
+$magenta: rgb(190,42,200);
+$yellow: rgb(255,255,0);
+$aqua: rgb(15,245,245);
+$purple: rgb(96,112,252);
 
 // Grays
-$black: #000;
+$black: rgb(12,12,12);
 $darkerGray: #222;
 $darkGray: #333;
 $gray: #666;
 $lightGray: #eee;
-$white: #fff;
+$white: rgb(255,255,255);
 
 // Font stacks
 $helvetica: Helvetica, Arial, sans-serif;
 $helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $georgia: Georgia, serif;
-
+$ubuntu: 'Ubuntu Mono', $georgia;
 // Mobile breakpoints
 @mixin mobile {
   @media screen and (max-width: 640px) {
