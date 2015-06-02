@@ -1,26 +1,26 @@
 ---
 layout: post
-title: nth-child as a flexbox alternative for elastic rows 
+title: CSS Solution for Elastic Items in Rows without Flexbox
 ---
 
 
-The goal: A dynamic list of 'x' equally sized elements per row. If the last row is > x number of elements, each element should be equal in size and take up the full width of the row.  
+The goal: A dynamic list of 'x' equally sized elements per row. If the last row is > x number of elements, each element should be equal in size and take up the full width of the row.
 
-Simple enough, right?  
+Simple enough, right?
 
-However, we have a couple of stipulations:  
+However, we have a couple of stipulations:
 
-First of all, we cannot use [Flexbox](http://www.w3.org/TR/css3-flexbox/), and second, while a javascript solution would be fairly simple, our layout must be achieved via CSS _only_.  
+First of all, we cannot use [Flexbox](http://www.w3.org/TR/css3-flexbox/), and second, while a javascript solution would be fairly simple, our layout must be achieved via CSS _only_.
 
-In other words, the requirements are:    
-	
-1. Rows by default must have an explicit number of equally sized items.   
-2. In cases where the last row has fewer items than the desired amount, the items of this row must each take an equal size and fill the entire row.  
-3. We cannot use [Flexbox](http://www.w3.org/TR/css3-flexbox/)    
+In other words, the requirements are:
+
+1. Rows by default must have an explicit number of equally sized items.
+2. In cases where the last row has fewer items than the desired amount, the items of this row must each take an equal size and fill the entire row.
+3. We cannot use [Flexbox](http://www.w3.org/TR/css3-flexbox/)
 4. Javascript is not an option, must solve this using only CSS!
 
 
-If you don't want to learn about how and why, just check out the codepen below or [here][css-only-codepen].  
+If you don't want to learn about how and why, just check out the codepen below or [here][css-only-codepen].
 
 
 
@@ -30,7 +30,7 @@ If you don't want to learn about how and why, just check out the codepen below o
 
 ##How It Works##
 
-The scope of this post is a 'nth-child' based approach. However, there are other options. We will look at some of these in future, related posts.  
+The scope of this post is a 'nth-child' based approach. However, there are other options. We will look at some of these in future, related posts.
 
 The nth-child is part of a larger group of CSS [pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) (see also, related: [pseudo-elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) )
 
@@ -44,7 +44,7 @@ You probably knew that chaining pseudo-classes is allowed, so you have probably 
 li:first-child:hover{ ... }
 ```
 
-which would allow us to style the hover state of the first list item.  
+which would allow us to style the hover state of the first list item.
 
 More importantly, we can extend this pseudo-class chaining to do some fairly sophisticated styling.
 
@@ -65,9 +65,9 @@ So, the fifth item can be targeted like this:
 li:nth-child(4n + 1){ ... }
 ````
 
-We know that the above selector will actually target the 1st, 5th, 9th et cetera element, which is not exactly what we need. What we want to do is to target the 1st, 5th, and so on _if_ it is also the _last_ 'li' in the 'ul'.  
+We know that the above selector will actually target the 1st, 5th, 9th et cetera element, which is not exactly what we need. What we want to do is to target the 1st, 5th, and so on _if_ it is also the _last_ 'li' in the 'ul'.
 
-Considering the ability to chain pseudo-classes, the answer may be apparent: 
+Considering the ability to chain pseudo-classes, the answer may be apparent:
 
 ```css
 li:nth-child(4n+1):last-child{ width: 100% }
